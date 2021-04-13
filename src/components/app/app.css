@@ -1,0 +1,15 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    background-color: #444;
+    min-height: 100vh;
+    font-family: Roboto;
+}
+.app{
+   width: 70%;
+   margin: 0 auto;
+}

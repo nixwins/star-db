@@ -1,0 +1,12 @@
+.random-planet {
+    display: flex;
+}
+.rp-img-wrapper img{
+    width:200px;
+    object-fit: cover;
+}
+
+.rp-description{
+    margin-left:10px;
+    color:#fff;
+}
