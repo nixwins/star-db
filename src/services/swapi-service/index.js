@@ -1,10 +1,11 @@
 export default class SwapiService{
 
-    url = "https://swapi.dev/api/";
+    _apiURL = "https://swapi.dev/api/";
+    _imageURL = `https://starwars-visualguide.com/assets/img`;
 
    async getResource(resource){
 
-      let req = await fetch(`${this.url}${resource}`);
+      let req = await fetch(`${this._apiURL}${resource}`);
 
       return await req.json();
     }
@@ -15,7 +16,7 @@ export default class SwapiService{
 
     async getAllPeople(){
       const resp = await this.getResource(`people`); 
-      console.log(resp.results);
+      // console.log(resp.results);
       const  result = resp.results.map(this._transformPerson);
    
       return result;
@@ -28,7 +29,7 @@ export default class SwapiService{
       return this._transformPlanet(planet)
     }
 
-    getAllPlanent(){
+    getAllPlanet(){
       return this.getResource(`planets`)
     }
 
@@ -44,7 +45,8 @@ export default class SwapiService{
           id,
           name:person.name,
           birthYear:person.birth_year,
-          height:person.height
+          height:person.height,
+          imageURL:`${this._imageURL}/characters/${id}.jpg`
       }
     }
 
@@ -56,7 +58,8 @@ export default class SwapiService{
           name:planet.name,
           population:planet.population,
           rotationPeriod:planet.rotation_period,
-          diameter:planet.diameter
+          diameter:planet.diameter,
+          imageURL:`${this._imageURL}/planets/${id}.jpg`
       }
     }
   }

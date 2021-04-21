@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+
 import Header from '../header';
+import ItemList from '../item-list';
 import RandomPlanet from '../random-planet';
-import PeoplePage from '../people-page';
 import './app.css'
 export default class App extends Component{
     render(){
@@ -9,7 +10,7 @@ export default class App extends Component{
             <div className="app">
                 <Header/>
                 <RandomPlanet/>
-                <PeoplePage />
+                <ItemList/>
             </div>)
     }
 }

@@ -3,6 +3,7 @@ import DetailsItem from '../details-item'
 import ListItem from '../list-item'
 import SwapiService from '../../services/swapi-service';
 import './people-page.css'
+
 export default class PeoplePage extends Component{
 
     _request = new SwapiService();
@@ -36,7 +37,13 @@ export default class PeoplePage extends Component{
 
         return(
             <div className="page-content">
-                <ListItem itemList={itemList} onItemClick={this.onItemClick}/>
+                <ListItem 
+                            itemList={itemList}
+                            onItemClick={this.onItemClick}>
+
+                            {(item)=>`${item.name} (${item.birthYear})`}
+                            
+                </ListItem>
                 <DetailsItem item={item} />
             </div>
         

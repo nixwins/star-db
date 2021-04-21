@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Error from './../error';
+import ErrorMessage from '../error-message';
 import SwapiService from '../../services/swapi-service';
 
 import './random-planet.css'
@@ -11,18 +11,21 @@ export default class RandomPlanet extends Component{
     state = {
         planet:{},
         loading:true,
-        error:false
+        hasError:false
     };
 
     componentDidMount(){
         this.updatePlanet();
-        setInterval(this.updatePlanet, 5000);  
+        this.interval = setInterval(this.updatePlanet, 5000);  
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.interval);
     }
 
     updatePlanet = ()=>{
 
         const id = Math.floor(Math.random()*20) + 2;
-        // console.log(id)
         this._request.getPlanet(id)
         .then(this.onLoaded)
         .catch(this.onError)
@@ -33,14 +36,14 @@ export default class RandomPlanet extends Component{
     };
 
     onError = ()=>{
-        this.setState({error:true})
+        this.setState({hasError:true})
     }
     render(){
 
-        const {loading, error, planet} =  this.state;
-        const spin = loading && !error  ? <Spin/> : null;
-        const planetViewer = !loading && !error  ? <PlanetViewer planet={planet}/> : null;
-        const errorEl =  error ? <Error/> : null;
+        const {loading, hasError, planet} =  this.state;
+        const spin = loading && !hasError  ? <Spin/> : null;
+        const planetViewer = !loading && !hasError  ? <PlanetViewer planet={planet}/> : null;
+        const errorEl =  hasError ? <ErrorMessage msg={`Cant' update planet by Planet:` }/> : null;
 
         return (
                 <div className="random-planet">
@@ -53,11 +56,11 @@ export default class RandomPlanet extends Component{
 }
 const PlanetViewer = ({planet})=>{
 
-   const {id, name, population, rotationPeriod, diameter} = planet;
+   const {id, name, population, rotationPeriod, diameter, imageURL} = planet;
 
     return (<React.Fragment >
                 <div className="rp-img-wrapper">
-                        <img src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt={name} />
+                        <img src={imageURL} alt={name} />
                     </div>
                     <div className="rp-description">
                         <h3>{name}</h3>
