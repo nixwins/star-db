@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import ErrorMessage from '../error-message';
 import SwapiService from '../../services/swapi-service';
+import Spinner from '../spinner';
 
 import './random-planet.css'
+
 
 export default class RandomPlanet extends Component{
 
@@ -41,7 +43,7 @@ export default class RandomPlanet extends Component{
     render(){
 
         const {loading, hasError, planet} =  this.state;
-        const spin = loading && !hasError  ? <Spin/> : null;
+        const spin = loading && !hasError  ? <Spinner /> : null;
         const planetViewer = !loading && !hasError  ? <PlanetViewer planet={planet}/> : null;
         const errorEl =  hasError ? <ErrorMessage msg={`Cant' update planet by Planet:` }/> : null;
 
@@ -69,13 +71,4 @@ const PlanetViewer = ({planet})=>{
                         <p>Diameter: <span>{diameter}</span></p>
                 </div>
             </React.Fragment>)
-}
-const Spin = ()=>{
-    return(
-        <div className="loadingio-spinner-interwind-nqrxppgvd4o">
-            <div className="ldio-7hink7wze5f">
-                 <div><div><div><div></div></div></div><div><div><div></div></div></div></div>
-            </div>
-        </div>
-    )
 }

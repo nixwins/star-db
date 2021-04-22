@@ -13,3 +13,9 @@ body{
    width: 70%;
    margin: 0 auto;
 }
+
+.page-content{
+    display: flex;
+    margin-bottom: 40px;
+    align-items: center;
+}
