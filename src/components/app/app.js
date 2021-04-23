@@ -5,28 +5,18 @@ import RandomPlanet from '../random-planet';
 import ItemDetails from '../item-details';
 
 import './app.css'
+import ThrowError from '../throw-error';
 export default class App extends Component {
 
-    // constructor() {
-    //     super()
-    //     this.onItemSelected = (id) => {
-    //         console.log(id);
-
-    //     }
-    // }
     state = {
         selectedItem: 2,
     }
-
     onItemSelected = (id) => {
 
         console.log(id)
         this.setState(() => {
             return { selectedItem: id }
         })
-        console.log("State id", this.state.selectedItem);
-
-
     }
     render() {
         return (
