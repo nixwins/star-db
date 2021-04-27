@@ -8,7 +8,8 @@ export default class ItemList extends Component {
 
     state = {
         itemList: [],
-        load: true
+        load: true,
+        activeId: null
     }
 
     swapiService = new SwapiService();
@@ -21,28 +22,39 @@ export default class ItemList extends Component {
                 this.setState({ itemList: peopleList, load: false })
             });
     }
+
+    onMarkActiveItem = (event) => {
+        const id = event.currentTarget.dataset.id;
+        this.props.onItemSelected(id)
+        this.setState({ activeId: id });
+    }
     render() {
 
-        const { itemList, load } = this.state;
+        const { itemList, load, activeId } = this.state;
 
         if (load) {
             return <Spinner />;
         }
+
         const items = itemList.map(({ id, name }) => {
+            let clazz = 'list-group-item list-group-item-action';
+
+            if (activeId === id) {
+                clazz += ' active'
+            }
             return <li
                 key={id}
-                onClick={() => this.props.onItemSelected(id)}
-                className="list-group-item list-group-item-action">
+                onClick={this.onMarkActiveItem}
+                className={clazz}
+                data-id={id}>
                 {name}
             </li>
         });
-
 
         return (
             <ul className="list-group">
                 {items}
             </ul>
-
         )
     }
 

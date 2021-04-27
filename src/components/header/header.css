@@ -15,6 +15,5 @@ nav a{
     color:aquamarine;
     text-decoration: none;
     display: inline-block;
-    width:40px;
-    margin-left:10px;
+    padding:5px;
 }
