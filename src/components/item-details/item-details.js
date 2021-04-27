@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './item-details.css';
 import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
+import ThrowError from '../throw-error/throw-error';
+import ErrorMessage from '../error-message/error-message';
 
 export default class ItemDetails extends Component {
 
@@ -39,9 +41,8 @@ export default class ItemDetails extends Component {
 
         const { item, load } = this.state;
 
-        if (load) {
-            return <Spinner />;
-        }
+        if (load) return <Spinner />;
+
 
         return (
             <div className="details-item">
@@ -52,8 +53,9 @@ export default class ItemDetails extends Component {
                     <li className="list-group-item">Name: {item.name}</li>
                     <li className="list-group-item">Birht Year: {item.birthYear}</li>
                     <li className="list-group-item">Height: {item.height}</li>
-
+                    <ThrowError />
                 </ul>
+
             </div>
         )
     }

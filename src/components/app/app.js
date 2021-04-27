@@ -6,27 +6,30 @@ import ItemDetails from '../item-details';
 
 import './app.css'
 import ThrowError from '../throw-error';
+import ErrorMessage from '../error-message/error-message';
+import PeoplePage from '../people-page';
 export default class App extends Component {
 
     state = {
-        selectedItem: 2,
+        hasError: false
     }
-    onItemSelected = (id) => {
 
-        console.log(id)
-        this.setState(() => {
-            return { selectedItem: id }
-        })
+
+    componentDidCatch() {
+        this.setState({ hasError: true });
+        console.log("componentDidCatch")
     }
     render() {
+
+        if (this.state.hasError) return <ErrorMessage />;
+
         return (
             <div className="app">
                 <Header />
                 <RandomPlanet />
-                <div className="page-content">
-                    <ItemList onItemSelected={this.onItemSelected} />
-                    <ItemDetails selectedItem={this.state.selectedItem} />
-                </div>
+                <PeoplePage />
+                <PeoplePage />
+                <PeoplePage />
 
             </div>)
     }
