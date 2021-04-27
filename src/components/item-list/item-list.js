@@ -16,8 +16,8 @@ export default class ItemList extends Component {
 
     componentDidMount() {
 
-        this.swapiService
-            .getAllPeople()
+        this.props
+            .getData()
             .then((peopleList) => {
                 this.setState({ itemList: peopleList, load: false })
             });
