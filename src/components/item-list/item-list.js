@@ -12,8 +12,6 @@ export default class ItemList extends Component {
         activeId: null
     }
 
-    swapiService = new SwapiService();
-
     componentDidMount() {
 
         this.props
@@ -28,6 +26,7 @@ export default class ItemList extends Component {
         this.props.onItemSelected(id)
         this.setState({ activeId: id });
     }
+
     render() {
 
         const { itemList, load, activeId } = this.state;

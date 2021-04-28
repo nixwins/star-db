@@ -1,9 +1,10 @@
 import React from 'react';
 import ItemList from '../item-list';
 import ItemDetails from '../item-details';
-import './people-page.css'
+
 import ErrorMessage from '../error-message/error-message';
 import SwapiService from '../../services/swapi-service';
+import './people-page.css'
 
 
 export default class PeoplePage extends React.Component {
@@ -32,9 +33,11 @@ export default class PeoplePage extends React.Component {
 
         if (hasError) return <ErrorMessage />
 
-        return (<div className="page-content">
-            <ItemList onItemSelected={this.onItemSelected} getData={this.swapiService.getAllPeople} />
-            <ItemDetails selectedItem={this.state.selectedItem} />
-        </div>)
+        return (
+                 <div className="page-content">
+                     <ItemList onItemSelected={this.onItemSelected} getData={this.swapiService.getAllPeople} />
+                     <ItemDetails selectedItem={this.state.selectedItem} />
+                 </div>
+                )
     }
 }
