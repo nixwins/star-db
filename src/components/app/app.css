@@ -14,10 +14,10 @@ body{
    margin: 0 auto;
 }
 
-.page-content{
+.row{
     display: flex;
     margin-bottom: 40px;
     align-items: center;
-    margin:0 auto;
+    margin:0 auto 20px auto;
     justify-content: center;
 }

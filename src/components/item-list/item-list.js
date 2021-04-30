@@ -4,6 +4,7 @@ import Spinner from '../spinner';
 
 import './item-list.css';
 
+
 export default class ItemList extends Component {
 
     state = {
@@ -27,32 +28,36 @@ export default class ItemList extends Component {
         this.setState({ activeId: id });
     }
 
-    render() {
+    renderItems(itemList, activeId) {
 
-        const { itemList, load, activeId } = this.state;
+        return itemList.map((item) => {
 
-        if (load) {
-            return <Spinner />;
-        }
-
-        const items = itemList.map(({ id, name }) => {
+            const { id } = item;
+            const label = this.props.children(item);
             let clazz = 'list-group-item list-group-item-action';
 
-            if (activeId === id) {
-                clazz += ' active'
-            }
+            clazz = (activeId === id) ? clazz += ' active' : clazz;
+
+
             return <li
                 key={id}
                 onClick={this.onMarkActiveItem}
                 className={clazz}
                 data-id={id}>
-                {name}
+                {label}
             </li>
         });
+    }
+
+    render() {
+
+        const { itemList, load, activeId } = this.state;
+
+        if (load) return <Spinner />;
 
         return (
             <ul className="list-group">
-                {items}
+                {this.renderItems(itemList, activeId)}
             </ul>
         )
     }
