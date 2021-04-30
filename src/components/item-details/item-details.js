@@ -5,6 +5,11 @@ import Spinner from '../spinner';
 import ThrowError from '../throw-error/throw-error';
 import ErrorMessage from '../error-message/error-message';
 
+const Record = ({ item, field, label }) => {
+    return (<li className="list-group-item"> {label} {item[field]}</li>);
+}
+export { Record }
+
 export default class ItemDetails extends Component {
 
     state = {
@@ -50,8 +55,9 @@ export default class ItemDetails extends Component {
                 </div>
                 <ul className="di-description">
                     <li className="list-group-item">Name: {item.name}</li>
-                    <li className="list-group-item">Birht Year: {item.birthYear}</li>
-                    <li className="list-group-item">Height: {item.height}</li>
+                    {React.Children.map(this.props.children, (child) => {
+                        return React.cloneElement(child, { item });
+                    })}
                     <ThrowError />
                 </ul>
 

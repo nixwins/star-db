@@ -8,6 +8,7 @@ import PeoplePage from '../people-page';
 import SwapiService from '../../services/swapi-service';
 
 import './app.css'
+import { Record } from '../item-details/item-details';
 
 export default class App extends Component {
 
@@ -38,13 +39,18 @@ export default class App extends Component {
                             getData={this.swapiService.getAllPlanets}
                         >
                             {(item) => <span>{item.name} ({item.diameter})</span>}
+
                         </ItemList>
 
                     </div>
                     <div className="md-6">
                         <ItemDetails
                             selectedItem={2}
-                            getData={this.swapiService.getPlanet} />
+                            getData={this.swapiService.getPlanet} >
+                            <Record label="Population" field="population" />
+                            <Record label="Rotation" field="rotationPeriod" />
+                            <Record label="Diameter" field="diameter" />
+                        </ItemDetails>
                     </div>
 
                 </div>

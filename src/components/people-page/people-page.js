@@ -6,7 +6,9 @@ import ErrorMessage from '../error-message/';
 import SwapiService from '../../services/swapi-service';
 import ErrorBoundary from '../error-boundary';
 
+import { Record } from '../item-details/item-details';
 import './people-page.css'
+
 
 
 export default class PeoplePage extends React.Component {
@@ -49,7 +51,11 @@ export default class PeoplePage extends React.Component {
             <ErrorBoundary>
                 <ItemDetails
                     selectedItem={this.state.selectedItem}
-                    getData={this.swapiService.getPerson} />
+                    getData={this.swapiService.getPerson} >
+                    <Record label="Gender" field="gender" />
+                    <Record label="Birth Year" field="birthYear" />
+                    <Record label="Height " field="height" />
+                </ItemDetails>
             </ErrorBoundary>
         );
         return (
