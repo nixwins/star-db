@@ -1,39 +1,27 @@
-import React, { Component } from 'react';
-import SwapiService from '../../services/swapi-service';
-import Spinner from '../spinner';
-
+import React, { useState } from 'react';
 import './item-list.css';
 
 
-export default class ItemList extends Component {
 
-    state = {
-        itemList: [],
-        load: true,
-        activeId: null
-    }
+export default function ItemList(props) {
 
-    componentDidMount() {
+    const { data } = props;
 
-        this.props
-            .getData()
-            .then((peopleList) => {
-                this.setState({ itemList: peopleList, load: false })
-            });
-    }
+    console.log(props)
 
-    onMarkActiveItem = (event) => {
+    const onMarkActiveItem = (event) => {
         const id = event.currentTarget.dataset.id;
-        this.props.onItemSelected(id)
-        this.setState({ activeId: id });
+        props.onItemSelected(id)
+        // this.setState({ activeId: id });
+        // setActiveId(id);
     }
 
-    renderItems(itemList, activeId) {
+    function renderItems(itemList, activeId) {
 
         return itemList.map((item) => {
 
             const { id } = item;
-            const label = this.props.children(item);
+            const label = props.children(item);
             let clazz = 'list-group-item list-group-item-action';
 
             clazz = (activeId === id) ? clazz += ' active' : clazz;
@@ -41,7 +29,7 @@ export default class ItemList extends Component {
 
             return <li
                 key={id}
-                onClick={this.onMarkActiveItem}
+                onClick={onMarkActiveItem}
                 className={clazz}
                 data-id={id}>
                 {label}
@@ -49,17 +37,14 @@ export default class ItemList extends Component {
         });
     }
 
-    render() {
 
-        const { itemList, load, activeId } = this.state;
 
-        if (load) return <Spinner />;
-
-        return (
-            <ul className="list-group">
-                {this.renderItems(itemList, activeId)}
-            </ul>
-        )
-    }
+    return (
+        <ul className="list-group">
+            {renderItems(data, null)}
+        </ul>
+    )
 
 }
+
+

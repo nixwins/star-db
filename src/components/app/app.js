@@ -9,6 +9,7 @@ import SwapiService from '../../services/swapi-service';
 
 import './app.css'
 import { Record } from '../item-details/item-details';
+import { PlanetList } from '../sw-components';
 
 export default class App extends Component {
 
@@ -20,7 +21,7 @@ export default class App extends Component {
 
     componentDidCatch() {
         this.setState({ hasError: true });
-        console.log("componentDidCatch")
+        //console.log("componentDidCatch")
     }
 
     render() {
@@ -34,13 +35,17 @@ export default class App extends Component {
                 <PeoplePage />
                 <div className="row mb2">
                     <div className="md-6">
-                        <ItemList
+                        {/* <ItemList
                             onItemSelected={this.onItemSelected}
                             getData={this.swapiService.getAllPlanets}
                         >
                             {(item) => <span>{item.name} ({item.diameter})</span>}
 
-                        </ItemList>
+                        </ItemList> */}
+
+                        <PlanetList>
+                            {(item) => <span>{item.name} ({item.diameter})</span>}
+                        </PlanetList>
 
                     </div>
                     <div className="md-6">
