@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import ErrorMessage from '../error-message';
 import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
-
-import './random-planet.css'
 import ThrowError from '../throw-error';
-
+import './random-planet.css'
 
 export default class RandomPlanet extends Component {
 
@@ -59,7 +57,7 @@ export default class RandomPlanet extends Component {
 }
 const PlanetViewer = ({ planet }) => {
 
-    const { id, name, population, rotationPeriod, diameter, imageURL } = planet;
+    const { name, population, rotationPeriod, diameter, imageURL } = planet;
 
     return (<React.Fragment >
         <div className="rp-img-wrapper">

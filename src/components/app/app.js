@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import Header from '../header';
-import ItemList from '../item-list';
 import RandomPlanet from '../random-planet';
-import ItemDetails from '../item-details';
 import ErrorMessage from '../error-message/error-message';
-import PeoplePage from '../people-page';
 import SwapiService from '../../services/swapi-service';
+import {
+    PlanetList,
+    PeopleList,
+    StarShipList,
+    PeopleDetails,
+    PlanetDetails,
+    StarShipDetails
+} from '../sw-components';
 
 import './app.css'
-import { Record } from '../item-details/item-details';
-import { PlanetList } from '../sw-components';
 
 export default class App extends Component {
 
@@ -21,7 +24,6 @@ export default class App extends Component {
 
     componentDidCatch() {
         this.setState({ hasError: true });
-        //console.log("componentDidCatch")
     }
 
     render() {
@@ -32,33 +34,28 @@ export default class App extends Component {
             <div className="app">
                 <Header />
                 <RandomPlanet />
-                <PeoplePage />
-                <div className="row mb2">
-                    <div className="md-6">
-                        {/* <ItemList
-                            onItemSelected={this.onItemSelected}
-                            getData={this.swapiService.getAllPlanets}
-                        >
-                            {(item) => <span>{item.name} ({item.diameter})</span>}
+                {/* <PeoplePage /> */}
+                <PeopleList>
+                    {(item) => <span>{item.name}</span>}
+                </PeopleList>
+                <PeopleDetails selectedItem={2}>
 
-                        </ItemList> */}
+                </PeopleDetails>
 
-                        <PlanetList>
-                            {(item) => <span>{item.name} ({item.diameter})</span>}
-                        </PlanetList>
+                <PlanetList>
+                    {(item) => <span>{item.name} ({item.diameter})</span>}
+                </PlanetList>
+                <PlanetDetails selectedItem={9}>
 
-                    </div>
-                    <div className="md-6">
-                        <ItemDetails
-                            selectedItem={2}
-                            getData={this.swapiService.getPlanet} >
-                            <Record label="Population" field="population" />
-                            <Record label="Rotation" field="rotationPeriod" />
-                            <Record label="Diameter" field="diameter" />
-                        </ItemDetails>
-                    </div>
+                </PlanetDetails>
 
-                </div>
+                <StarShipList>
+                    {(item) => <span>{item.name}</span>}
+                </StarShipList>
+                <StarShipDetails selectedItem={9}>
+
+                </StarShipDetails>
+
 
             </div>)
     }

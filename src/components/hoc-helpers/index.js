@@ -1,4 +1,4 @@
-import withData from '../item-list/item-list';
+import withData from './with-data';
 
 export {
     withData

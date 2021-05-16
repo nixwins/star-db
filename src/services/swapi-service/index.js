@@ -17,7 +17,7 @@ export default class SwapiService {
 
   getAllPeople = async () => {
     const resp = await this.getResource(`people`);
-    // console.log(resp.results);
+    console.log(resp.results);
     const result = resp.results.map(this._transformPerson);
 
     return result;
@@ -30,10 +30,22 @@ export default class SwapiService {
     return this._transformPlanet(planet)
   }
 
+
   getAllPlanets = async () => {
     const resp = await this.getResource('planets');
 
     return resp.results.map(this._transformPlanet);
+  }
+
+  getStarShip = async (id) => {
+    const starShip = await this.getResource(`starships/${id}`);
+    return this._transformStarShip(starShip)
+  }
+
+
+  getAllStarShip = async () => {
+    const resp = await this.getResource('starships');
+    return resp.results.map(this._transformStarShip)
   }
 
   _extractIdFromUrl = (url) => {
@@ -64,6 +76,15 @@ export default class SwapiService {
       rotationPeriod: planet.rotation_period,
       diameter: planet.diameter,
       imageURL: `${this._imageURL}/planets/${id}.jpg`
+    }
+  }
+
+  _transformStarShip = (startShip) => {
+    const id = this._extractIdFromUrl(startShip.url);
+    return {
+      id,
+      name: startShip.name,
+      imageURL: `${this._imageURL}/starships/${id}.jpg`
     }
   }
 }
