@@ -15,10 +15,10 @@ const StarShipDetails = (props) => {
 
 };
 
-const mapMetodsToProps = (swapiService) => {
+const mapMethodsToProps = (swapiService) => {
     return {
         getData: swapiService.getStarShip
     }
 }
 
-export default withSwapiService(StarShipDetails, mapMetodsToProps);
+export default withSwapiService(StarShipDetails, mapMethodsToProps);
