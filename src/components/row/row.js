@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Row = ({ lItem, rItem }) => {
+const Row = ({ left, right }) => {
     return (
-        <div className="row mb2">
+        <div className="row mb2 d-flex">
             <div className="md-6">
-                {lItem}
+                {left}
             </div>
-            <div className="md-6">
-                {rItem}
+            <div className="md-5">
+                {right}
             </div>
         </div>
     )

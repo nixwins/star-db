@@ -10,14 +10,15 @@ body{
     font-family: Roboto;
 }
 .app{
-   width: 70%;
+    max-width:1170px;
+   width: 100%;
    margin: 0 auto;
 }
 
 .row{
     display: flex;
     margin-bottom: 40px;
-    align-items: center;
+    /* align-items: center; */
     margin:0 auto 20px auto;
     justify-content: center;
 }

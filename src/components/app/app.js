@@ -7,12 +7,14 @@ import {
     PlanetList,
     PeopleList,
     StarShipList,
-    PeopleDetails,
+    PersonDetails,
     PlanetDetails,
     StarShipDetails
 } from '../sw-components';
-
+import { SwapiServiceProvider } from '../sw-service-context';
 import './app.css'
+import Row from '../row';
+import PeoplePage from '../pages/people-page';
 
 export default class App extends Component {
 
@@ -32,29 +34,24 @@ export default class App extends Component {
 
         return (
             <div className="app">
-                <Header />
-                <RandomPlanet />
-                {/* <PeoplePage /> */}
-                <PeopleList>
-                    {(item) => <span>{item.name}</span>}
-                </PeopleList>
-                <PeopleDetails selectedItem={2}>
+                <SwapiServiceProvider value={this.swapiService}>
 
-                </PeopleDetails>
+                    <Header />
 
-                <PlanetList>
-                    {(item) => <span>{item.name} ({item.diameter})</span>}
-                </PlanetList>
-                <PlanetDetails selectedItem={9}>
+                    <RandomPlanet />
+                    <PeoplePage />
+                    <Row
+                        left={<PlanetList />}
+                        right={<PlanetDetails selectedItem={9} />}
+                    />
 
-                </PlanetDetails>
+                    <Row
+                        left={<StarShipList />}
+                        right={<StarShipDetails selectedItem={9} />}
+                    />
 
-                <StarShipList>
-                    {(item) => <span>{item.name}</span>}
-                </StarShipList>
-                <StarShipDetails selectedItem={9}>
+                </SwapiServiceProvider>
 
-                </StarShipDetails>
 
 
             </div>)
