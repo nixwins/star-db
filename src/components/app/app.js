@@ -3,18 +3,11 @@ import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ErrorMessage from '../error-message/error-message';
 import SwapiService from '../../services/swapi-service';
-import {
-    PlanetList,
-    PeopleList,
-    StarShipList,
-    PersonDetails,
-    PlanetDetails,
-    StarShipDetails
-} from '../sw-components';
 import { SwapiServiceProvider } from '../sw-service-context';
+import { PeoplePage, PlanetPage, StarShipPage } from '../pages';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
 import './app.css'
-import Row from '../row';
-import PeoplePage from '../pages/people-page';
 
 export default class App extends Component {
 
@@ -36,21 +29,25 @@ export default class App extends Component {
             <div className="app">
                 <SwapiServiceProvider value={this.swapiService}>
 
-                    <Header />
+                    <BrowserRouter>
+                        <Header />
 
-                    <RandomPlanet />
-                    <PeoplePage />
-                    <Row
-                        left={<PlanetList />}
-                        right={<PlanetDetails selectedItem={9} />}
-                    />
+                        <RandomPlanet />
 
-                    <Row
-                        left={<StarShipList />}
-                        right={<StarShipDetails selectedItem={9} />}
-                    />
+                        <Route to="/"
+                            render={() => {
+                                return <h2>Welcome StarDB</h2>
+                            }}
+                            exact={true} />
+
+                        <Route path="/people" component={PeoplePage} />
+                        <Route path="/planets" component={PlanetPage} />
+                        <Route path="/starships" component={StarShipPage} />
+
+                    </BrowserRouter>
 
                 </SwapiServiceProvider>
+
 
 
 
