@@ -8,6 +8,7 @@ import { PeoplePage, PlanetPage, StarShipPage } from '../pages';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import './app.css'
+import { StarShipDetails, PersonDetails } from '../sw-components';
 
 export default class App extends Component {
 
@@ -44,12 +45,18 @@ export default class App extends Component {
                             <Route path="/people" exact>
                                 <PeoplePage />
                             </Route>
+                            <Route path="/people/:id" exact render={({ match, location, history }) => {
+                                console.log(match)
+                                return <PersonDetails selectedItem={match.params.id} />
+                            }} />
+
                             <Route path="/planets" exact>
                                 <PlanetPage />
                             </Route>
                             <Route path="/starships" exact>
                                 <StarShipPage />
                             </Route>
+
 
                         </Switch>
 
